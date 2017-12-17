@@ -39,7 +39,7 @@ X_total <- X_total[, Selected_Features[, 1]]
 
 ##descriptive activity
 colnames(Y_total) <- "activity"
-Y_total$activitylabel <- factor(Y_total$activity, labels = activity_labels[,2])
+Y_total$ActivityLabels <- factor(Y_total$activity, labels = activity_labels[,2])
 ActivityLabels <- Y_total[, 2]
 
 ##labels the data set with descriptive variable names.
@@ -48,5 +48,5 @@ colnames(X_total) <- features[Selected_Features[,1],2]
 ##
 colnames(Subject_total) <- "subject"
 data <- cbind(X_total, ActivityLabels, Subject_total)
-total_mean <- data %>% group_by(ActivityLabels, subject) %>% summarize(funs(mean))
+total_mean <- data %>% group_by(ActivityLabels, subject) %>% summarize_all(funs(mean))
 write.table(total_mean, file = "./UCI HAR Dataset/results.txt", row.names = FALSE, col.names = TRUE)
